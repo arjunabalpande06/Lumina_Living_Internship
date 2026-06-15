@@ -1,0 +1,91 @@
+.reviews {
+  width: 100%;
+  padding: 80px 20px;
+  background: #f6f3fb;
+  text-align: center;
+}
+
+.reviews-header h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.reviews-header p {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+/* WRAPPER */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* ARROWS */
+.arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: #7c3aed;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.arrow:hover {
+  transform: scale(1.1);
+  background: #5b21b6;
+}
+
+/* SLIDER ROW */
+.slider {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  max-width: 1200px;
+}
+
+/* CARD */
+.review-card {
+  flex: 0 0 calc(25% - 15px); /* 4 cards default */
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.review-card:hover {
+  transform: translateY(-6px);
+}
+
+.review-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   MOBILE (3 SLIDES)
+========================= */
+@media (max-width: 768px) {
+  .review-card {
+    flex: 0 0 calc(33.33% - 15px); /* 3 cards */
+  }
+
+  .reviews-header h2 {
+    font-size: 30px;
+  }
+
+  .arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+}
