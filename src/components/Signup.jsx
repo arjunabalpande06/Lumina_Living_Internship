@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import "./Signup.css";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
+
+import { auth, db } from "../firebase";
+import Navbar from "../components/Navbar";
+import FooterSection from "../components/FooterSection";
+
+import "./Signup.css";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -21,102 +24,110 @@ function Signup() {
     }
 
     try {
-  const userCredential =
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+      const userCredential =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-  const user = userCredential.user;
+      const user = userCredential.user;
 
-  await setDoc(doc(db, "users", user.uid), {
-    uid: user.uid,
-    name: name,
-    email: email,
-    createdAt: new Date(),
-  });
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: name,
+        email: email,
+        createdAt: new Date(),
+      });
 
-  alert("Account Created Successfully!");
+      alert("Account Created Successfully!");
 
-} catch (error) {
-  alert(error.message);
-} };
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
-    <div className="signup-page">
-      <div className="signup-container">
+    <>
+      {/* Navbar */}
+      <Navbar />
 
-        <div className="signup-image-section">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png"
-            alt="Signup Illustration"
-            className="signup-image"
-          />
-        </div>
+      {/* Signup Page */}
+      <div className="signup-page">
+        <div className="signup-container">
 
-        <div className="signup-card">
-          <h1>Create Account</h1>
-          <p>Join Lumina Living today</p>
-
-          <form onSubmit={handleSignup}>
-
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) =>
-                setName(e.target.value)
-              }
+          {/* Left Side */}
+          <div className="signup-image-section">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png"
+              alt="Signup Illustration"
+              className="signup-image"
             />
+          </div>
 
-            <input
-              type="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-            />
+          {/* Right Side */}
+          <div className="signup-card">
+            <h1>Create Account</h1>
+            <p>Join Lumina Living today</p>
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-            />
+            <form onSubmit={handleSignup}>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) =>
-                setConfirmPassword(e.target.value)
-              }
-            />
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
-            <button type="submit">
-              Sign Up
-            </button>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
 
-          </form>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) =>
+                  setConfirmPassword(e.target.value)
+                }
+                required
+              />
 
-          <div className="signup-footer">
-            Already have an account?
+              <button type="submit">
+                Sign Up
+              </button>
+            </form>
 
-            <Link
-              to="/login"
-              className="login-link"
-            >
-              {" "}Login
-            </Link>
+            <div className="signup-footer">
+              Already have an account?
+
+              <Link
+                to="/login"
+                className="login-link"
+              >
+                {" "}Login
+              </Link>
+            </div>
           </div>
 
         </div>
       </div>
-    </div>
+
+      {/* Footer */}
+      <FooterSection />
+    </>
   );
 }
 

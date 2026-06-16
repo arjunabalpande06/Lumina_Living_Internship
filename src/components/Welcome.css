@@ -5,85 +5,167 @@
   font-family: Arial, sans-serif;
 }
 
+/* PAGE */
 .welcome-page {
+  background: #ffffff;
   min-height: 100vh;
-  background: #f5f3fb;
-  padding: 40px;
+  padding-top: 90px; /* navbar space */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Header Section */
-.welcome-header {
+/* HERO */
+.hero {
   text-align: center;
-  margin-bottom: 40px;
+  padding: 40px 20px 10px;
 }
 
-.welcome-header h1 {
-  font-size: 3rem;
-  color: #6c4df6;
-  margin-bottom: 10px;
+.hero h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #222;
 }
 
-.welcome-header p {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.explore-btn {
-  padding: 12px 30px;
-  border: none;
-  border-radius: 30px;
-  background: #6c4df6;
-  color: white;
+.hero p {
+  color: #666;
+  margin-top: 8px;
   font-size: 1rem;
+}
+
+.hero-btn {
+  margin-top: 18px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  background: #ff385c;
+  color: white;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
-.explore-btn:hover {
-  background: #5538d8;
-  transform: translateY(-3px);
+.hero-btn:hover {
+  background: #e03150;
+  transform: scale(1.05);
 }
 
-/* Grid */
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.section-title h2 {
+  font-size: 1.8rem;
+  color: #222;
+}
+
+.section-title p {
+  color: #777;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+/* GRID */
 .property-grid {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  padding: 30px;
 }
 
-/* Cards */
-.property-card {
-  background: white;
-  border-radius: 15px;
+/* CARD (Airbnb style) */
+.airbnb-card {
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.25s;
 }
 
-.property-card:hover {
-  transform: translateY(-8px);
+.airbnb-card:hover {
+  transform: translateY(-6px);
 }
 
-.property-card img {
+/* IMAGE */
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.image-wrapper img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.property-info {
-  padding: 15px;
+.airbnb-card:hover img {
+  transform: scale(1.07);
 }
 
-.property-info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+/* rating badge */
+.rating {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.property-info p {
-  color: gray;
+/* CARD CONTENT */
+.card-content {
+  padding: 12px 6px;
 }
 
+.card-top h3 {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 600;
+}
+
+.location {
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* bottom row */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price {
+  font-weight: 700;
+  color: #222;
+}
+
+/* button */
+.view-btn {
+  border: none;
+  background: #111;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.view-btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* NAVBAR FIX (if needed) */
 .navbar {
   position: fixed;
   top: 0;
@@ -91,9 +173,5 @@
   width: 100%;
   z-index: 1000;
   background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.welcome-page {
-  padding-top: 90px; /* important so navbar doesn't overlap */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
