@@ -307,8 +307,8 @@ body {
 
  linear-gradient(
  135deg,
- #ff385c,
- #ff758c
+ #5d14d4,
+ #530ad1
  );
 
 }
@@ -395,5 +395,44 @@ grid-template-columns:1fr;
 font-size:28px;
 
 }
+
+}
+
+.show-all-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+
+.show-all-btn {
+
+  background: #6c63ff;
+
+  color: white;
+
+  border: none;
+
+  padding: 14px 32px;
+
+  border-radius: 30px;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+}
+
+
+
+.show-all-btn:hover {
+
+  background:#5548f5;
+
+  transform:translateY(-2px);
 
 }

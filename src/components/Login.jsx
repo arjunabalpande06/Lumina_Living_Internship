@@ -13,33 +13,40 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
-    e.preventDefault();
 
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+ e.preventDefault();
 
-      alert("Login Successful!");
-      navigate("/welcome");
+ try {
 
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+   await signInWithEmailAndPassword(
+     auth,
+     email,
+     password
+   );
+
+
+   alert("Login Successful!");
+
+   navigate("/welcome");
+
+
+ }
+
+ catch(error){
+
+   alert(error.message);
+
+ }
+
+};
 
   return (
     <>
-      {/* Navbar */}
       <Navbar />
 
-      {/* Login Section */}
       <div className="login-page">
         <div className="login-container">
 
-          {/* Left Side */}
           <div className="login-image-section">
             <img
               src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
@@ -48,7 +55,6 @@ function Login() {
             />
           </div>
 
-          {/* Right Side */}
           <div className="login-card">
             <h1>Welcome Back</h1>
             <p>Login to your account</p>
@@ -77,10 +83,7 @@ function Login() {
 
             <div className="login-footer">
               Don't have an account?
-              <Link
-                to="/signup"
-                className="signup-link"
-              >
+              <Link to="/signup" className="signup-link">
                 {" "}Sign Up
               </Link>
             </div>
@@ -89,7 +92,6 @@ function Login() {
         </div>
       </div>
 
-      {/* Footer */}
       <FooterSection />
     </>
   );
