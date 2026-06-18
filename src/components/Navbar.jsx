@@ -4,85 +4,51 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import "./Navbar.css";
 
-
 const Navbar = () => {
-
-  const [menuOpen,setMenuOpen] = useState(false);
-  const [user,setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const navigate = useNavigate();
 
-
-
-  useEffect(()=>{
-
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
-      (currentUser)=>{
-
+      (currentUser) => {
         setUser(currentUser);
-
       }
     );
 
+    return () => unsubscribe();
+  }, []);
 
-    return ()=>unsubscribe();
-
-
-  },[]);
-
-
-
-
-
-  const logout = async()=>{
-
+  const logout = async () => {
     await signOut(auth);
 
+    setDropdownOpen(false);
     setMenuOpen(false);
 
     navigate("/");
-
   };
 
-
-
-
-
-  const scrollToExplore = ()=>{
-
+  const scrollToExplore = () => {
     const explore =
       document.getElementById("explore");
 
-
-    if(explore){
-
+    if (explore) {
       explore.scrollIntoView({
-        behavior:"smooth"
+        behavior: "smooth",
       });
-
     }
 
-
     setMenuOpen(false);
-
   };
 
-
-
-
-
-
   return (
-
     <nav className="navbar">
-
-
-
       {/* LOGO */}
 
       <div className="logo">
-
         <div className="logo-box">
           M
         </div>
@@ -90,331 +56,165 @@ const Navbar = () => {
         <h2>
           Lumina Living
         </h2>
-
       </div>
-
-
-
-
-
-
 
       {/* LINKS */}
 
-      <ul 
-        className={`nav-links ${menuOpen?"active":""}`}
+      <ul
+        className={`nav-links ${
+          menuOpen ? "active" : ""
+        }`}
       >
-
-
         <li>
-
           <Link
             to="/"
-            onClick={()=>setMenuOpen(false)}
+            onClick={() =>
+              setMenuOpen(false)
+            }
           >
             Home
           </Link>
-
         </li>
 
-
-
-
         <li>
-
           <a
-
             href="#explore"
-
-            onClick={(e)=>{
-
+            onClick={(e) => {
               e.preventDefault();
-
               scrollToExplore();
-
             }}
-
           >
-
             Explore
-
           </a>
-
-
         </li>
 
-
-
-
-
         <li>
-
           <a href="/">
             Matches
           </a>
-
         </li>
 
-
-
-
-
         <li>
-
           <a href="/">
             Stories
           </a>
-
         </li>
-
-
-
-
-
 
         {/* MOBILE USER AREA */}
 
         <li className="mobile-user">
-
-
-        {
-
-          user ? (
-
+          {user ? (
             <>
-
-
               <img
-
                 className="mobile-profile-photo"
-
                 src={
                   user.photoURL ||
                   "https://i.pravatar.cc/100"
                 }
-
                 alt="profile"
-
               />
 
-
-
               <button
-
                 className="mobile-profile-btn"
-
-                onClick={()=>{
-
+                onClick={() => {
                   navigate("/profile");
-
                   setMenuOpen(false);
-
                 }}
-
               >
-
                 My Profile
-
               </button>
-
-
-
-
 
               <button
-
                 className="mobile-logout-btn"
-
                 onClick={logout}
-
               >
-
                 Logout
-
               </button>
-
-
-
             </>
-
-
-          )
-
-          :
-
-          (
-
-
+          ) : (
             <button
-
               className="mobile-login-btn"
-
-              onClick={()=>{
-
+              onClick={() => {
                 navigate("/login");
-
                 setMenuOpen(false);
-
               }}
-
             >
-
               Login
-
             </button>
-
-
-          )
-
-        }
-
-
+          )}
         </li>
-
-
-
       </ul>
-
-
-
-
-
-
-
-
 
       {/* RIGHT SECTION */}
 
-
       <div className="nav-right">
-
-
-
-
-
-      {
-
-        user ? (
-
-          <>
-
-
+        {user ? (
+          <div className="profile-dropdown">
             <img
-
               className="profile-photo"
-
               src={
-
                 user.photoURL ||
-
                 "https://i.pravatar.cc/100"
-
               }
-
               alt="profile"
-
-
-              onClick={()=>navigate("/profile")}
-
+              onClick={() =>
+                setDropdownOpen(
+                  !dropdownOpen
+                )
+              }
             />
 
+            {dropdownOpen && (
+              <div className="dropdown-menu">
+                <button
+                  onClick={() => {
+                    navigate("/profile");
+                    setDropdownOpen(false);
+                  }}
+                >
+                  My Profile
+                </button>
 
-
-
-            <button
-
-              className="logout-btn"
-
-              onClick={logout}
-
-            >
-
-              Logout
-
-            </button>
-
-
-
-          </>
-
-        )
-
-        :
-
-        (
-
+                <button
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
           <button
-
             className="login-btn"
-
-            onClick={()=>navigate("/login")}
-
+            onClick={() =>
+              navigate("/login")
+            }
           >
-
             Login
-
           </button>
+        )}
 
-        )
+        <button className="room-btn">
+          List a Room
+        </button>
 
-      }
+        {/* HAMBURGER */}
 
-
-
-
-
-
-      <button className="room-btn">
-
-        List a Room
-
-      </button>
-
-
-
-
-
-
-
-
-      {/* HAMBURGER */}
-
-
-      <div
-
-        className={`hamburger ${
-          menuOpen ? "active" : ""
-        }`}
-
-
-        onClick={()=>setMenuOpen(!menuOpen)}
-
-      >
-
-        <span></span>
-
-        <span></span>
-
-        <span></span>
-
-
+        <div
+          className={`hamburger ${
+            menuOpen ? "active" : ""
+          }`}
+          onClick={() =>
+            setMenuOpen(!menuOpen)
+          }
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-
-
-
-
-
-      </div>
-
-
-
-
-
     </nav>
-
   );
-
 };
-
 
 export default Navbar;
