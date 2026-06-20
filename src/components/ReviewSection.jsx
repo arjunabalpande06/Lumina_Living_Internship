@@ -81,7 +81,7 @@ function ReviewSection() {
   useEffect(() => {
     const updateSize = () => {
       if (window.innerWidth <= 768) {
-        setCardsToShow(3); // mobile
+        setCardsToShow(1); // mobile
       } else {
         setCardsToShow(4); // laptop + desktop
       }

@@ -75,17 +75,35 @@
    MOBILE (3 SLIDES)
 ========================= */
 @media (max-width: 768px) {
+  .slider-wrapper {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .slider {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
   .review-card {
-    flex: 0 0 calc(33.33% - 15px); /* 3 cards */
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .reviews-header h2 {
     font-size: 30px;
   }
 
+  .reviews-header p {
+    font-size: 14px;
+  }
+
   .arrow {
     width: 38px;
     height: 38px;
     font-size: 18px;
+    flex-shrink: 0;
   }
 }
