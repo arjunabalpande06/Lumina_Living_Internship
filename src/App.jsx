@@ -9,6 +9,7 @@ import FooterSection from "./components/FooterSection";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Welcome from "./components/Welcome";
+import Profile from "./components/Profile";
 
 function Home() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
